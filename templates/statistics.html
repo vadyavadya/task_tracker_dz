@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block user %}
+    {{ current_user.full_name }}
+{% endblock %}
+
+
+{% block title %}
+Статистика
+{% endblock %}
+
+{% block body_tytel %}
+Статистика
+{% endblock %}
+
+{% block body_statistics %}
+{% for el in stat_dic%}
+    <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm">
+          <div class="card-header py-3">
+            <h4 class="my-0 fw-normal">{{ el }}</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title"><small class="text-muted fw-light"></small></h1>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>{{ stat_dic[el] }}</li>
+            </ul>
+          </div>
+        </div>
+    </div>
+{% endfor %}
+{% endblock %}
+

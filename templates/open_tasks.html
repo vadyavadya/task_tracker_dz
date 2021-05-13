@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block user %}
+    {{ current_user.full_name }}
+{% endblock %}
+
+
+{% block title %}
+Открытые задачи
+{% endblock %}
+
+{% block body_tytel %}
+Открытые задачи
+{% endblock %}
+
+{% block  body_text %}
+    <div class="alert alert-info">
+        <a href="/create-task" class="btn btn-warning">Создать задачу</a>
+    </div>
+    {% if tasks|length>0 %}
+        {% for el in tasks %}
+            <div class="alert alert-info">
+                <p>Статус: {{ status.query.filter_by(id=el.lost_status).first().name }}</p>
+                <p>{{ el.description }}</p>
+                <p>Назначен на: {{ users.query.filter_by(id=el.id_user).first().full_name }}</p>
+                <p><d>Дата создания: {{ el.data_create.date() }}</d></p>
+                {% if current_user.id == el.id_user %}
+                <a href="/task/{{ el.id }}/to_work" class="btn btn-success">Взять в работу</a>
+                <a href="/task/{{ el.id }}/reject" class="btn btn-danger">Отклонить</a>
+                {% endif %}
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>У нас еще нет задач</p>
+    {% endif %}
+
+{% endblock %}
+

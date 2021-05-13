@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Добавление задачи
+{% endblock %}
+
+{% block body_tytel %}
+Добавление задачи
+{% endblock %}
+
+
+
+{% block  body_form %}
+<form method="post">
+    <textarea name="description" id="description" class="form-control" placeholder="Описание задачи"></textarea><br>
+    <select name="user">
+        <option disabled>Выберите исполнителя</option>
+        {% for el in users %}
+        <option value="{{ el.id }}">{{ el.full_name }}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" class="btn-success" value="Добавить">
+{% endblock %}
